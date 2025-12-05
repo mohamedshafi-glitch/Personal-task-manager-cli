@@ -1,10 +1,10 @@
 import click
-from lib.helpers import get_session
 from lib.models.user import User
-from lib.models.task import Task, Base, engine
+from lib.models.task import Task
+from lib.models.base import Base, engine
+from lib.helpers import get_session
 from lib.seed import seed_data
 
-# Initialize Click group
 @click.group()
 def cli():
     """Personal Task Manager CLI"""
@@ -13,7 +13,6 @@ def cli():
 # -----------------------------
 # Database Commands
 # -----------------------------
-
 @cli.command("init-db")
 def init_db():
     """Initialize the database and create tables."""
@@ -29,7 +28,6 @@ def seed():
 # -----------------------------
 # User Commands
 # -----------------------------
-
 @cli.command("create-user")
 @click.argument("username")
 def create_user(username):
@@ -71,7 +69,6 @@ def delete_user(username):
 # -----------------------------
 # Task Commands
 # -----------------------------
-
 @cli.command("add-task")
 @click.argument("username")
 @click.argument("title")
@@ -120,8 +117,7 @@ def complete_task(task_id):
     click.echo(f"Task {task_id} completed.")
 
 # -----------------------------
-# Run the CLI
+# Run CLI
 # -----------------------------
-
 if __name__ == "__main__":
     cli()

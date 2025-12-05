@@ -1,11 +1,5 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base, scoped_session
-
-DATABASE_URL = "sqlite:///tasks.db"
-
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
-SessionLocal = scoped_session(sessionmaker(bind=engine, autoflush=False, autocommit=False))
-Base = declarative_base()
+from .models.base import SessionLocal
 
 def get_session():
+    """Return a new database session."""
     return SessionLocal()

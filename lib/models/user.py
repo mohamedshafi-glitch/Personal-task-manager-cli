@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from lib.models.base import Base
+from .base import Base
 
 class User(Base):
     __tablename__ = "users"
@@ -8,7 +8,4 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String, unique=True, nullable=False)
 
-    tasks = relationship("Task", back_populates="owner")
-
-    def __repr__(self):
-        return f"<User id={self.id} username='{self.username}'>"
+    tasks = relationship("Task", back_populates="owner", cascade="all, delete")
